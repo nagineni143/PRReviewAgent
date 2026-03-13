@@ -1,0 +1,51 @@
+# Build folders
+bin/
+obj/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Debug symbols
+*.pdb
+
+# Visual Studio cache
+.vs/
+
+# Rider / JetBrains
+.idea/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# Test results
+TestResults/
+
+# Publish output
+publish/
+
+# App settings (secrets)
+appsettings.Development.json
+appsettings.Local.json
+
+# Environment files
+.env
+
+# Node modules (if frontend inside same repo)
+node_modules/
+
+# Coverage reports
+coverage/
+*.coverage
+*.coveragexml

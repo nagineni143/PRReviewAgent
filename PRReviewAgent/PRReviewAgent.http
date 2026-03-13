@@ -1,0 +1,6 @@
+@PRReviewAgent_HostAddress = http://localhost:5087
+
+GET {{PRReviewAgent_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
