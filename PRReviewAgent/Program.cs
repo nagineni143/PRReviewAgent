@@ -57,7 +57,31 @@ app.MapGet("/pr/{number}/review", async (
     var batchChanges = batcher.CreateBatches(changes);
 
     var review = await agent.ReviewBatchAsync(batchChanges);
-    repo.SaveIssues(number, review.Issues);
+    repo.ResolveMissingIssues(number, review.Issues);
+
+    var commit = await github.GetLatestCommit(number);
+
+    foreach (var issue in review.Issues)
+    {
+        if (repo.IssueExists(number, issue.File, issue.Line, issue.Rule))
+            continue;
+
+        var message = $"❌ {issue.Rule} violation\n{issue.Description}";
+
+        await github.AddLineComment(
+            number,
+            commit,
+            issue.File,
+            issue.Line,
+            message);
+    }
+    repo.SaveIssues(number, review.Issues, changes);
+
+    if (!repo.GetIssues(number).Any(i => !i.Resolved))
+    {
+        await github.DismissPendingReviews(number);
+        await github.ApprovePullRequest(number);
+    }
 
     return review;
 })

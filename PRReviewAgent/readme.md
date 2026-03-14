@@ -1,4 +1,4 @@
-1. GitHubPRClient - connect with github for PR details
+1. GitHubPRClient - connect with github for PR details, PR comments, Approvals
 Response:
 [
   {
